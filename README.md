@@ -6,3 +6,8 @@
  * chmod +x install.sh
 2. ejecutar el script como root:
  * bash install.sh
+
+##Updates
+
+ * Mejoras en los escripts de instalación, post-instalación y purga.
+ * Ya no es necesario copiar el fichero DBConn_DefaultSettings.ini a la carpeta personal

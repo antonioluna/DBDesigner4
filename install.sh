@@ -1,36 +1,41 @@
 #! /bin/bash
 
-# Ruta absoluta, e.g. /home/user/bin/foo.sh
+printf "\n%s\n\n" 'Script de instalción de DBDesigner4 en Debian 8.2 "Jessie"'
 
-the_absolute=$(readlink -f "$0")
-
-# directorio contenedor, e.g /home/user/bin
-the_path=$(dirname "$the_absolute")
-
-#Comprobación usuario
-
-the_user=`whoami`
-
-if [ $the_user != "root" ]; then
-	printf "Este script debe ejecutarse como root \n"
+if (( $(id -u) != 0 )); then
+	printf "\n%s\n\n" "Este script debe ejecutarse como root"
 	exit 1
 fi
 
-if [ ! -e kylixlibs3-borqt_3.0-1_i386.deb ]; then
-	echo "No se encuentra el paquete kylixlibs3-borqt_3.0-1_i386.deb"
+if [[ "$( uname -v | cut -d " " -f 3 )" != "Debian" ]] && [[ "$( uname -m )" != "x86_64" ]]; then
+
+	printf "\n%s\n\n" "Este escript está diseñado para sistemas operativos Debian x86_64"
 	exit 1
 fi
 
-if [ ! -e dbdesigner-4.0.5.6.deb ]; then
-        echo "No se encuentra el paquete dbdesigner-4.0.5.6.deb"
-        exit 1
+if [[ ! -e kylixlibs3-borqt_3.0-1_i386.deb ]]; then
+	printf "\n%s\n\n" "No se encuentra el paquete kylixlibs3-borqt_3.0-1_i386.deb"
+	exit 1
+else
+	printf "\n%s\n\n" "Instalando kylixlibs3-borqt_3.0-1_i386.deb"
+	sleep 3
+	dpkg --add-architecture i386 || exit 1
+	apt-get update && dpkg -i kylixlibs3-borqt_3.0-1_i386.deb
+	printf "\n%s\n\n" "Corrigiendo dependencias de kylixlibs3-borqt_3.0-1_i386.deb"
+	sleep 3
+	apt-get -f install || exit 1
 fi
 
-dpkg --add-architecture i386 >> $the_path/install.log 2>&1
-apt-get update >> $the_path/install.log 2>&1
-dpkg -i $the_path/kylixlibs3-borqt_3.0-1_i386.deb >> $the_path/install.log 2>&1
-apt-get -f install -y >> $the_path/install.log 2>&1
-dpkg -i $the_path/dbdesigner-4.0.5.6.deb >> $the_path/install.log 2>&1
-apt-get -f install -y >> $the_path/install.log 2>&1
+if [[ ! -e dbdesigner-4.0.5.6.deb ]]; then
+	printf "\n%s\n\n" "No se encuentra el paquete dbdesigner-4.0.5.6.deb"
+	exit 1
+else
+	printf "\n%s\n\n" "Instalando dbdesigner-4.0.5.6.deb"
+	sleep 3
+	dpkg -i dbdesigner-4.0.5.6.deb
+	printf "\n%s\n\n" "Corrigiendo dependencias de dbdesigner-4.0.5.6.deb"
+	sleep 3
+	apt-get -f install || exit 1
+fi
 
-echo "Instalación completada. Recuerde copiar el fichero DBConn_DefaultSettings.ini en el directorio .DBDesigner4 dentro de su directorio personal una vez ejecutado el software"
+printf "\n%s\n\n" "Instalación completada."
