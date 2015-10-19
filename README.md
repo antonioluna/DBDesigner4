@@ -9,5 +9,5 @@
 
 ##Updates
 
- * Mejoras en los escripts de instalación, post-instalación y purga.
+ * Mejoras en los scripts de instalación, post-instalación y purga.
  * Ya no es necesario copiar el fichero DBConn_DefaultSettings.ini a la carpeta personal
