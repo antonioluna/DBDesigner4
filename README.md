@@ -11,3 +11,7 @@
 
  * Mejoras en los scripts de instalación, post-instalación y purga.
  * Ya no es necesario copiar el fichero DBConn_DefaultSettings.ini a la carpeta personal
+ 
+#UPDATE IMPORTANTE
+
+* Corregida dependencia que podía provocar la desinstalación de varios paquetes importantes en 64 bits.
