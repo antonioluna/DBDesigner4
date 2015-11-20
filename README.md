@@ -15,3 +15,17 @@
 #UPDATE IMPORTANTE
 
 * Corregida dependencia que podía provocar la desinstalación de varios paquetes importantes en 64 bits.
+
+##Usar los siguientes repositorios
+
+* deb http://ftp.es.debian.org/debian/ jessie main
+
+* deb-src http://ftp.es.debian.org/debian/ jessie main
+
+* deb http://security.debian.org/ jessie/updates main
+
+* deb-src http://security.debian.org/ jessie/updates main
+
+* deb http://ftp.es.debian.org/debian/ jessie-updates main
+
+* deb-src http://ftp.es.debian.org/debian/ jessie-updates main
